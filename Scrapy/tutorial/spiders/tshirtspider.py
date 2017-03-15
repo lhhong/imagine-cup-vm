@@ -7,13 +7,14 @@ class QuotesSpider(scrapy.Spider):
 
     def start_requests(self):
         urls = [
-            'https://www.zalora.sg/men/clothing/pants/?sort=popularity&dir=desc&category_id=30',
-            'https://www.zalora.sg/men/clothing/pants/?sort=popularity&dir=desc&page=2&category_id=30',
-            'https://www.zalora.sg/men/clothing/pants/?sort=popularity&dir=desc&page=3&category_id=30',
-            'https://www.zalora.sg/men/clothing/pants/?sort=popularity&dir=desc&page=4&category_id=30',
-            'https://www.zalora.sg/men/clothing/pants/?sort=popularity&dir=desc&page=5&category_id=30',
-            'https://www.zalora.sg/men/clothing/pants/?sort=popularity&dir=desc&page=6&category_id=30',
-            
+            #'https://www.zalora.sg/men/clothing/solid-t-shirts/?sort=popularity&dir=desc&category_id=2101',
+            #'https://www.zalora.sg/men/clothing/solid-t-shirts/?sort=popularity&dir=desc&page=2&category_id=2101',
+            #'https://www.zalora.sg/men/clothing/solid-t-shirts/?sort=popularity&dir=desc&page=3&category_id=2101',
+            #'https://www.zalora.sg/men/clothing/solid-t-shirts/?sort=popularity&dir=desc&page=4&category_id=2101',
+            #'https://www.zalora.sg/men/clothing/solid-t-shirts/?sort=popularity&dir=desc&page=5&category_id=2101',
+            #'https://www.zalora.sg/men/clothing/solid-t-shirts/?sort=popularity&dir=desc&page=6&category_id=2101',
+            'https://www.zalora.sg/men/clothing/solid-t-shirts/?sort=popularity&dir=desc&page=7&category_id=2101',
+
 
         ]
         for url in urls:
@@ -29,40 +30,33 @@ class QuotesSpider(scrapy.Spider):
                 args={'wait': 0.5},
             )
 
-
+        
     def parse(self, response):
-  #   	yield {
-  #   		'test': response.xpath("//script[contains(., 'app.settings = {')]/text()").re('(?<="facet_prices":).+(?=")'),
-		# }
-
-        # yield {
-        #     # 'html':response.css('div.b-catalogList__itm.js-catalogList__itm.unit.size1of3'),
-        #     # 'img': response.css('img.b-catalogList__itm-img.js-itm-img.js-itm-hover-img-front'),
-        #     #'image': response.css('span.b-catalogList__itmImageWrapper.js-catalogImage.js-itm-hover img::attr(src)').extract()
-        #     'links': response.css('li.b-catalogList__itm.js-catalogList__itm.unit.size1of3')
-        # }
-
         for item in response.css('li.b-catalogList__itm.js-catalogList__itm.unit.size1of3'):
             link = item.css('a::attr(href)').extract_first()
             link = response.urljoin(link)
             yield scrapy.Request(link, callback=self.getinfo)
 
-        # for x in response.css('ul.ui-listHorizontal.pgn')
-
-        # for page in response.css('li.ui-listItem'):
-        #     print 'hi'
-        #     page = page.css('a::attr(href)').extract()
-        #     if page is not None:
-        #         print page
-                # page = response.urljoin(page)
-                # yield scrapy.Request(page, callback=self.parsepage)
+        
 
     def getinfo(self, response):
-    	yield {
-            'url': response.url,
-    		'image': response.css('div.l-productImage.box div.productZoom::attr(data-zoom)').extract_first(),
-            'colour': response.css('td[itemprop="color"]::text').extract_first(), #but can't extract just the text
-            'description': response.css('div.product__title.fsm::text').extract_first(),
-    	}
-
-    	#do saving of picture and description here 
+        if response.css('div.price-box__regular-price.js-detail_updateSku_skuPrice span::text').extract_first() is not None:
+        	yield {
+                'url': response.url,
+        		'image': response.css('div.l-productImage.box div.productZoom::attr(data-zoom)').extract_first(),
+                'colour': response.css('td[itemprop="color"]::text').extract_first(),
+                'brand': response.css('div.js-prd-brand.product__brand a::text').extract_first(),
+                'title': response.css('div.product__title.fsm::text').extract_first(),
+                'price': response.css('div.price-box__regular-price.js-detail_updateSku_skuPrice span::text').extract_first(),
+                'description': response.css('div#productDesc.box.mtl.fss.clearfix::text').extract(),
+        	}
+        else:
+            yield {
+                'url': response.url,
+                'image': response.css('div.l-productImage.box div.productZoom::attr(data-zoom)').extract_first(),
+                'colour': response.css('td[itemprop="color"]::text').extract_first(),
+                'brand': response.css('div.js-prd-brand.product__brand a::text').extract_first(),
+                'title': response.css('div.product__title.fsm::text').extract_first(),
+                'price': response.css('span.js-detail_updateSku_specialPrice span.value::text').extract_first(),
+                'description': response.css('div#productDesc.box.mtl.fss.clearfix::text').extract(),
+            }

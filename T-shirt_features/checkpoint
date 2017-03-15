@@ -1,0 +1,2 @@
+model_checkpoint_path: "T-shirt_features"
+all_model_checkpoint_paths: "T-shirt_features"

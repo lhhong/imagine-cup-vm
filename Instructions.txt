@@ -1,2 +1,0 @@
-1) Run getposture.py to get cropped tops, bottoms, and shoes
-2) Run get2048.py to get 2048-D vector of image
