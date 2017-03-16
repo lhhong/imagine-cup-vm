@@ -1,4 +1,3 @@
-from getbottleneck import get_bottleneck
 import tensorflow as tf
 import sys
 import os
@@ -7,7 +6,7 @@ import json
 import argparse
 from tensorflow.python.platform import gfile
 
-def democolour(image_dir):
+def democolour(image_input):
 	keys = {
 			(1,0,0,0,0,0,0,0,0,0): 'Blue',
 			(0,1,0,0,0,0,0,0,0,0): 'Dark Blue',
@@ -24,9 +23,6 @@ def democolour(image_dir):
 
 	savename = 'Colours'
 
-
-	image_input = get_bottleneck(image_dir)
-	image_input = [np.asarray(image_input)]
 	# print (image_input)
 
 	# with gfile.FastGFile(savename+'.pbtxt','rb') as f:

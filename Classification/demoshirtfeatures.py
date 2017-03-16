@@ -1,4 +1,3 @@
-from getbottleneck import get_bottleneck
 import tensorflow as tf
 import sys
 import os
@@ -6,7 +5,7 @@ import numpy as np
 import json
 from tensorflow.python.platform import gfile
 
-def demoshirt(image_dir):
+def demoshirt(image_input):
 	keys = {
 			0: 'Check',
 			1: 'Denim',
@@ -17,16 +16,6 @@ def demoshirt(image_dir):
 
 
 	savename = 'Shirt_features'
-
-
-	image_input = get_bottleneck(image_dir)
-	image_input = [np.asarray(image_input)]
-	# print (image_input)
-
-	# with gfile.FastGFile(savename+'.pbtxt','rb') as f:
-	# 	graph_def = tf.GraphDef()
-	# 	graph_def.ParseFromString(f.read())
-	# 	tf.import_graph_def(graph_def, name='')
 
 	tf.reset_default_graph()
 

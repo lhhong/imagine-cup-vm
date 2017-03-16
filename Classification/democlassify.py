@@ -1,4 +1,3 @@
-from getbottleneck import get_bottleneck
 import tensorflow as tf
 import sys
 import os
@@ -10,7 +9,7 @@ from tensorflow.python.platform import gfile
 
 
 
-def democlassify(image_dir, clothing_type):
+def democlassify(image_input, clothing_type):
 
 	keys = {
 		(1,0,0,0,0,0): 'Short sleeve T-shirt',
@@ -39,9 +38,6 @@ def democlassify(image_dir, clothing_type):
 	}
 
 
-	image_input = get_bottleneck(image_dir)
-	image_input = [np.asarray(image_input)]
-	
 	if clothing_type == 'tops':
 		savename = 'Types_of_tops'
 	elif clothing_type == 'bottoms':

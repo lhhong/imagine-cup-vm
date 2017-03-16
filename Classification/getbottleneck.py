@@ -64,5 +64,8 @@ def get_bottleneck(image_dir):
 
 	sess = tf.Session()
 
-	image_data = gfile.FastGFile(image_dir, 'rb').read()
+	if len(image_dir) < 100:
+		image_data = gfile.FastGFile(image_dir, 'rb').read()
+	else:
+		image_data = image_dir
 	return run_bottleneck_on_image(sess, image_data, jpeg_data_tensor, bottleneck_tensor)

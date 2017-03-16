@@ -2,8 +2,10 @@ from democolour import democolour
 from demotshirtfeatures import demotshirt
 from demoshirtfeatures import demoshirt
 from democlassify import democlassify
+from getbottleneck import get_bottleneck
 import json
 import os
+import numpy as np
 from tensorflow.python.platform import gfile
 
 def predict(image_dir):
@@ -22,15 +24,17 @@ def predict(image_dir):
 
 
 	for top_dir in tops_list:
+		img = get_bottleneck(top_dir)
+		img = [np.asarray(img)]
 		top_info = []
-		top_type = democlassify(top_dir, 'tops')
+		top_type = democlassify(img, 'tops')
 		top_info.append({'Type': top_type})
-		top_colour = democolour(top_dir)
+		top_colour = democolour(img)
 		if 'T-' in top_type:
-			tshirt_features = demotshirt(top_dir)
+			tshirt_features = demotshirt(img)
 			top_info.append({'Features': tshirt_features, 'Colour': top_colour})
 		elif 'shirt' in top_type:
-			shirt_features = demoshirt(top_dir)
+			shirt_features = demoshirt(img)
 			top_info.append({'Features': shirt_features, 'Colour': top_colour})
 		else:
 			top_info.append({'Colour': top_colour})
@@ -40,9 +44,11 @@ def predict(image_dir):
 			jsonfile.write(json.dumps(top_info))
 
 	for bottom_dir in bottoms_list:
+		img = get_bottleneck(bottom_dir)
+		img = [np.asarray(img)]
 		bottom_info = []
-		bottom_type = democlassify(bottom_dir, 'bottoms')
-		bottom_colour = democolour(bottom_dir)
+		bottom_type = democlassify(img, 'bottoms')
+		bottom_colour = democolour(img)
 		bottom_info.append({'Type': bottom_type})
 		bottom_info.append({'Colour': bottom_colour})
 
@@ -51,9 +57,11 @@ def predict(image_dir):
 			jsonfile.write(json.dumps(bottom_info))
 
 	for shoe_dir in shoes_list:
+		img = get_bottleneck(shoe_dir)
+		img = [np.asarray(img)]
 		shoe_info = []
-		shoe_type = democlassify(shoe_dir, 'shoes')
-		shoe_colour = democolour(shoe_dir)
+		shoe_type = democlassify(img, 'shoes')
+		shoe_colour = democolour(img)
 		shoe_info.append({'Type': shoe_type})
 		shoe_info.append({'Colour': shoe_colour})
 

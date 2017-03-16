@@ -1,6 +1,7 @@
 # import http.client, urllib.request, urllib.parse, urllib.error, base64
 import httplib, urllib, base64
 import json
+import io
 
 ''' to save in database: 
     personId, name, userData, personGroupId, persistedFaceId (use this to remove face added to person) 
@@ -11,6 +12,7 @@ headers = {
     # Request headers
     'Content-Type': 'application/json',
     'Ocp-Apim-Subscription-Key': 'cd8b879914c442788232a9a6f8fe67bc',
+    'Process-Data': False
 }
 
 
@@ -73,6 +75,7 @@ def check_photo(image_url, personId, personGroupId):
         'url': image_url
     }
 
+
     conn = httplib.HTTPSConnection('westus.api.cognitive.microsoft.com')
     conn.request("POST", "/face/v1.0/detect?%s" % params, str(body), headers)
     response = conn.getresponse()
@@ -82,7 +85,6 @@ def check_photo(image_url, personId, personGroupId):
 
     json_data = json.loads(data)
     for entry in json_data:
-        print (entry)
         faceId = str(entry['faceId'])
         if check_face(faceId, personId, personGroupId):
             coords = entry['faceRectangle']
@@ -107,7 +109,6 @@ def check_face(faceId, personId, personGroupId):
     conn.close()
 
     json_data = json.loads(data)
-    print (json_data)
     if json_data['isIdentical']:
         return True
     else:
@@ -118,9 +119,14 @@ def main():
     personGroupId = 'putin'
     selfie = 'http://i.telegraph.co.uk/multimedia/archive/03463/putin_3463140k.jpg'
     photo = 'https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg'
+    photo = 'http://i.telegraph.co.uk/multimedia/archive/03463/putin_3463140k.jpg'
 
-    # personId = create_person(name, personGroupId)
-    # add_face(selfie, personId, personGroupId)
+
+    urllib.urlretrieve(photo, 'photo.jpg')
+    with open("photo.jpg", "rb") as imageFile:
+        f = imageFile.read()
+        b = bytearray(f)
+
     possible_coords = check_photo(photo, 'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', personGroupId)
     print (possible_coords)
     print ('done!')
