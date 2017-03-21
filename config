@@ -28,6 +28,8 @@ bbox_ratio = 0.25
 [[1]]
 caffemodel = 'RMPE/model/_trained_COCO/pose_iter_440000.caffemodel'
 deployFile = 'RMPE/model/_trained_COCO/pose_deploy.prototxt'
+#caffemodel = 'RMPE/model/_trained_MPI/pose_iter_146000.caffemodel'
+#deployFile = 'RMPE/model/_trained_MPI/pose_deploy.prototxt'
 #caffemodel = '../../model/_trained_COCO/pose_iter_440000.caffemodel'
 #deployFile = '../../model/_trained_COCO/pose_deploy.prototxt'
 description = 'COCO Pose56 Two-level Linevec'

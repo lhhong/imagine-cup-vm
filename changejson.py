@@ -38,48 +38,25 @@ jsonshoes = [
 				'Scraped Json/trainers.json',
 				]
 
-			# print ('NONE!!')
-			# print item['title']
-			# print item['description']
-			# print item['image']
-			# print (topjson)
-			# count += 1
-count = 0
+# filename = 'Scraped Json/boatshoes.json'
 
-for shoejson in jsonshoes:
-	jsonfile = open(shoejson)
+for filename in jsonshoes:
+	print (filename)
+	jsonfile = open(filename)
 	items = json.load(jsonfile)
 
 	for item in items:
-		
-		temp = item['colour']
+		tmp = item['dir']
+		array = tmp.split('/')
+		tmp = array[0]+'/'+array[1]+'/shoes'+array[-1]
+		print (tmp)
+	# 	item['dir']=tmp
 
-		
-
-		if temp == 'blue' or temp=='purple' or temp == 'green' or temp == 'khaki' or temp == 'brown' or temp =='black' or temp=='grey' or temp=='lightblue' or temp=='darkblue' or temp == 'maroon' or temp == 'pink' or temp =='red' or temp=='orange' or temp=='white' or temp=='yellow' or temp=='olive' or temp=='camo':
-			continue
-		print temp
-		tmp = temp
-		print item['image']
-		# print item['image']
-
-		if '214' in tmp:
-			item['colour'] = 'khaki'
-		elif 'rust' in tmp:
-			item['colour'] = 'brown'
-		elif 'mink' in tmp:
-			item['colour'] = 'brown'
-		elif 'multi' in tmp:
-			item['colour'] = 'white'
-	
-
-	# with open(shoejson, 'w') as jsonfile:
+	# with open(filename, 'w') as jsonfile:
 	# 	jsonfile.write(json.dumps(items))
 
-	print (str(shoejson)+' changed')
 
-
-
+#############################################
 # for bottomjson in jsonbottoms:
 # 	jsonfile = open(bottomjson)
 # 	items = json.load(jsonfile)
@@ -90,22 +67,10 @@ for shoejson in jsonshoes:
 # 		if temp == 'blue' or temp == 'green' or temp == 'khaki' or temp == 'brown' or temp =='black' or temp=='grey' or temp=='lightblue' or temp=='darkblue' or temp == 'maroon' or temp == 'pink' or temp =='red' or temp=='orange' or temp=='white' or temp=='yellow' or temp=='olive' or temp=='camo':
 # 			continue
 
-
-
 	# with open(bottomjson, 'w') as jsonfile:
 	# 	jsonfile.write(json.dumps(items))
 
 	# print (str(bottomjson)+' changed')
-
-
-
-
-
-
-
-
-
-
 
 
 # for shoejson in jsonshoes:
@@ -119,12 +84,6 @@ for shoejson in jsonshoes:
 
 # 	with open(shoejson, 'w') as jsonfile:
 # 	    jsonfile.write(json.dumps(items))
-
-
-
-
-
-
 
 
 #### ---------------------------------------------------- #######
