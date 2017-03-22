@@ -112,7 +112,7 @@ print ('Total count: '+str(total))
 
 
 ################################
-
+'''
 for jsonfile in jsonshoes:
 	labels = open('../'+jsonfile)
 	labels = json.load(labels)
@@ -121,3 +121,4 @@ for jsonfile in jsonshoes:
 		if tmp == 'Black' or tmp=='White' or tmp=='Grey' or tmp=='Khaki' or tmp=='Red' or tmp=='Blue' or tmp=='Green' or tmp=='Pink' or tmp=='Yellow':
 			continue
 		print item['colour']
+'''
