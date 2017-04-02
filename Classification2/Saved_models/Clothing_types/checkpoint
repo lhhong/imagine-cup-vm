@@ -1,0 +1,2 @@
+model_checkpoint_path: "Clothing_types"
+all_model_checkpoint_paths: "Clothing_types"

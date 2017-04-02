@@ -1,0 +1,54 @@
+Classifiers needed:
+
+*** CHECK if all rows only have one selection
+
+
+Type classifier, then the following.
+
+
+Tops:
+	- Colour {softmax}
+	- Secondary colour (None or any other colour) {softmax}
+	- Type {softmax}
+		- T-shirt style {sigmoid}
+		- Shirt style {sigmoid}
+		- T-shirt fit {softmax}
+		- Shirt fit {softmax}
+	- Patterns {sigmoid}
+	- Material {softmax}
+
+Bottoms:
+	- Colour {softmax}
+	- Secondary colour (None or any other colour) {softmax}
+	- Type {softmax}
+	- Material {softmax}
+		- Denim style {sigmoid}
+	- Patterns {sigmoid}
+	- Fit {softmax}
+	- Style {softmax}
+
+Shoes:
+	- Colour {softmax}
+	- Secondary colour (None or any other colour) {softmax}
+	- Type (boat/loafer, boots, sneakers, sport, sandals, dress, casual) {softmax}
+	- Features (toe cap, gum sole, with logo, high-cut) {sigmoid}
+	- Materials (leather, canvas, suede, rubber) {sigmoid}
+
+
+
+top-primary-color-white	top-primary-color-beige	top-primary-color-black	top-primary-color-brown	top-primary-color-grey	top-primary-color-blue	top-primary-color-navy	top-primary-color-teal	top-primary-color-green	top-primary-color-olive	top-primary-color-pink	top-primary-color-red	top-primary-color-maroon	top-primary-color-purple	top-primary-color-orange	top-primary-color-yellow	top-secondary-color-white	top-secondary-color-beige	top-secondary-color-black	top-secondary-color-brown	top-secondary-color-grey	top-secondary-color-blue	top-secondary-color-navy	top-secondary-color-teal	top-secondary-color-green	top-secondary-color-olive	top-secondary-color-pink	top-secondary-color-red	top-secondary-color-maroon	top-secondary-color-purple	top-secondary-color-orange	top-secondary-color-yellow	top-secondary-color-none	top-type-short-sleeve-t-shirt	top-type-long-sleeve-t-shirt	top-type-short-sleeve-shirt	top-type-long-sleeve-shirt	top-type-singlet	top-type-polo	
+@t-shirt-style-graphic-text	t-shirt-style-graphic-image	t-shirt-style-round-neck	t-shirt-style-henley	t-shirt-style-pocket	
+@t-shirt-fit-slim-fit	t-shirt-fit-longline	t-shirt-fit-baggy	t-shirt-fit-regular	
+@shirt-style-oxford	shirt-style-dress	shirt-style-graphic	shirt-style-pocket	shirt-style-granddad-collar	
+@shirt-fit-slim-fit	shirt-fit-regular-fit	
+@top-patterns-animal-print	top-patterns-argyle	top-patterns-horizontal-stripe	top-patterns-vertical-stripe	top-patterns-checkered	top-patterns-dotted	top-patterns-floral	top-patterns-plaid	
+@top-material-denim	top-material-dry-fit	top-material-cotton
+
+
+bottom-primary-color-white	bottom-primary-color-beige	bottom-primary-color-black	bottom-primary-color-brown	bottom-primary-color-grey	bottom-primary-color-blue	bottom-primary-color-navy	bottom-primary-color-teal	bottom-primary-color-green	bottom-primary-color-olive	bottom-primary-color-pink	bottom-primary-color-red	bottom-primary-color-maroon	bottom-primary-color-purple	bottom-primary-color-orange	bottom-primary-color-yellow	bottom-secondary-color-white	bottom-secondary-color-beige	bottom-secondary-color-black	bottom-secondary-color-brown	bottom-secondary-color-grey	bottom-secondary-color-blue	bottom-secondary-color-navy	bottom-secondary-color-teal	bottom-secondary-color-green	bottom-secondary-color-olive	bottom-secondary-color-pink	bottom-secondary-color-red	bottom-secondary-color-maroon	bottom-secondary-color-purple	bottom-secondary-color-orange	bottom-secondary-color-yellow	bottom-secondary-color-none	bottom-type-long pants	bottom-type-shorts	bottom-material-denim/jeans	bottom-material-cotton	bottom-material-dry-fit	denim-style-ripped	denim-style-acid-wash	denim-style-washed	bottom-patterns-animal-print	bottom-patterns-argyle	bottom-patterns-horizontal-stripe	bottom-patterns-vertical-stripe	bottom-patterns-checkered	bottom-patterns-dotted	bottom-patterns-floral	bottom-patterns-plaid	bottom-style-cargo	bottom-style-dress	bottom-style-chinos	bottom-style-sweatpants	bottom-style-none	bottom-fit-skinny-fit	bottom-fit-slim-fit	bottom-fit-regular-fit	bottom-fit-baggy
+
+
+shoes-primary-color-white	shoes-primary-color-beige	shoes-primary-color-black	shoes-primary-color-brown	shoes-primary-color-grey	shoes-primary-color-blue	shoes-primary-color-navy	shoes-primary-color-teal	shoes-primary-color-green	shoes-primary-color-olive	shoes-primary-color-pink	shoes-primary-color-red	shoes-primary-color-maroon	shoes-primary-color-purple	shoes-primary-color-orange	shoes-primary-color-yellow	shoes-secondary-color-white	shoes-secondary-color-beige	shoes-secondary-color-black	shoes-secondary-color-brown	shoes-secondary-color-grey	shoes-secondary-color-blue	shoes-secondary-color-navy	shoes-secondary-color-teal	shoes-secondary-color-green	shoes-secondary-color-olive	shoes-secondary-color-pink	shoes-secondary-color-red	shoes-secondary-color-maroon	shoes-secondary-color-purple	shoes-secondary-color-orange	shoes-secondary-color-yellow	shoes-secondary-color-none	shoes-type-boat/loafer	shoes-type-boots	shoes-type-sneakers	shoes-type-sport	shoes-type-sandals	shoes-type-dress-shoes	shoes-type-casual-shoes	shoes-others-toe-cap	shoes-others-gum-sole	shoes-others-with-logo	shoes-others-high-cut	shoes-materials-leather	shoes-materials-canvas	shoes-materials-suede	shoes-materials-rubber
+
+
+
