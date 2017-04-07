@@ -70,22 +70,22 @@ def predict_top(bottleneck_values):
 	return summary
 
 def predict_top_vector(bottleneck_values):
-	top_primary = list(predict_x_2('Top_primary_colours', bottleneck_values)[0])
-	top_secondary = list(predict_x_2('Top_secondary_colours', bottleneck_values)[0])
-	top_type = list(predict_x_2('Top_types', bottleneck_values)[0])
+	top_primary = predict_x_2('Top_primary_colours', bottleneck_values)[0].tolist()
+	top_secondary = predict_x_2('Top_secondary_colours', bottleneck_values)[0].tolist()
+	top_type = predict_x_2('Top_types', bottleneck_values)[0].tolist()
 	actual_type = predict_x('Top_types', bottleneck_values)
 	if 't-' in actual_type or 'singlet' in actual_type or 'polo' in actual_type:
-		t_shirt_style = list(predict_x_2('T-shirt_styles', bottleneck_values, False)[0])
-		t_shirt_fit = list(predict_x_2('T-shirt_fits', bottleneck_values)[0])
+		t_shirt_style = predict_x_2('T-shirt_styles', bottleneck_values, False)[0].tolist()
+		t_shirt_fit = predict_x_2('T-shirt_fits', bottleneck_values)[0].tolist()
 		shirt_style = [0,0,0,0,0]
 		shirt_fit = [0,0]
 	else:
-		shirt_style = list(predict_x_2('Shirt_styles', bottleneck_values, False)[0])
-		shirt_fit = list(predict_x_2('Shirt_fits', bottleneck_values)[0])
+		shirt_style = predict_x_2('Shirt_styles', bottleneck_values, False)[0].tolist()
+		shirt_fit = predict_x_2('Shirt_fits', bottleneck_values)[0].tolist()
 		t_shirt_style = [0,0,0,0,0]
 		t_shirt_fit = [0,0,0,0]
-	top_pattern = list(predict_x_2('Top_patterns', bottleneck_values, False)[0])
-	top_material = list(predict_x_2('Top_materials', bottleneck_values)[0])
+	top_pattern = predict_x_2('Top_patterns', bottleneck_values, False)[0].tolist()
+	top_material = predict_x_2('Top_materials', bottleneck_values)[0].tolist()
 	combined = top_primary + top_secondary + top_type + t_shirt_style + t_shirt_fit + shirt_style + shirt_fit + top_pattern + top_material
 	return combined
 
@@ -104,18 +104,18 @@ def predict_bottom(bottleneck_values):
 	return summary
 
 def predict_bottom_vector(bottleneck_values):
-	bottom_pri = list(predict_x_2('Bottom_primary_colours', bottleneck_values)[0])
-	bottom_sec = list(predict_x_2('Bottom_secondary_colours', bottleneck_values)[0])
-	bottom_type = list(predict_x_2('Bottom_types', bottleneck_values)[0])
-	bottom_material = list(predict_x_2('Bottom_materials', bottleneck_values)[0])
+	bottom_pri = predict_x_2('Bottom_primary_colours', bottleneck_values)[0].tolist()
+	bottom_sec = predict_x_2('Bottom_secondary_colours', bottleneck_values)[0].tolist()
+	bottom_type = predict_x_2('Bottom_types', bottleneck_values)[0].tolist()
+	bottom_material = predict_x_2('Bottom_materials', bottleneck_values)[0].tolist()
 	actual_material = predict_x('Bottom_materials', bottleneck_values)
 	if 'denim' in actual_material:
-		denim_style = list(predict_x_2('Denim_styles', bottleneck_values, False)[0])
+		denim_style = predict_x_2('Denim_styles', bottleneck_values, False)[0].tolist()
 	else:
 		denim_style = [0,0,0]
-	bottom_pattern = list(predict_x_2('Bottom_patterns', bottleneck_values, False)[0])
-	bottom_style = list(predict_x_2('Bottom_styles', bottleneck_values)[0])
-	bottom_fit = list(predict_x_2('Bottom_fits', bottleneck_values)[0])
+	bottom_pattern = predict_x_2('Bottom_patterns', bottleneck_values, False)[0].tolist()
+	bottom_style = predict_x_2('Bottom_styles', bottleneck_values)[0].tolist()
+	bottom_fit = predict_x_2('Bottom_fits', bottleneck_values)[0].tolist()
 	combined = bottom_pri+bottom_sec+bottom_type+bottom_material+denim_style+bottom_pattern+bottom_style+bottom_fit
 	return combined
 
@@ -130,11 +130,11 @@ def predict_shoe(bottleneck_values):
 	return summary
 
 def predict_shoe_vector(bottleneck_values):
-	shoe_pri = list(predict_x_2('Shoe_primary_colours', bottleneck_values)[0])
-	shoe_sec = list(predict_x_2('Shoe_secondary_colours', bottleneck_values)[0])
-	shoe_type = list(predict_x_2('Shoe_types', bottleneck_values)[0])
-	shoe_feature = list(predict_x_2('Shoe_features', bottleneck_values, False)[0])
-	shoe_material = list(predict_x_2('Shoe_materials', bottleneck_values, False)[0])
+	shoe_pri = predict_x_2('Shoe_primary_colours', bottleneck_values)[0].tolist()
+	shoe_sec = predict_x_2('Shoe_secondary_colours', bottleneck_values)[0].tolist()
+	shoe_type = predict_x_2('Shoe_types', bottleneck_values)[0].tolist()
+	shoe_feature = predict_x_2('Shoe_features', bottleneck_values, False)[0].tolist()
+	shoe_material = predict_x_2('Shoe_materials', bottleneck_values, False)[0].tolist()
 	combined = shoe_pri+shoe_sec+shoe_type+shoe_feature+shoe_material
 	return combined
 
@@ -160,12 +160,8 @@ def predict_vector(image_url): # used to output predicted vector
 		output = predict_bottom_vector(bottleneck_values)
 	elif clothing_type == 2:
 		output = predict_shoe_vector(bottleneck_values)
-	print (type(output[0]))
-	x = []
-	for a in output:
-		x.append(np.asscalar(a)) # converting from np.float32 to float
 	response = {}
-	response['vector'] = x
+	response['vector'] = output
 	return response
 
 '''
