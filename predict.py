@@ -138,7 +138,7 @@ def predict_shoe_vector(bottleneck_values):
 	combined = shoe_pri+shoe_sec+shoe_type+shoe_feature+shoe_material
 	return combined
 
-def predict(bottleneck_values, clothing_type=None): # this function could be removed
+def predict(bottleneck_values, clothing_type=None):
 	if clothing_type is None:
 		clothing_type = predict_type(bottleneck_values)
 	if clothing_type == 0:
@@ -160,8 +160,12 @@ def predict_vector(image_url): # used to output predicted vector
 		output = predict_bottom_vector(bottleneck_values)
 	elif clothing_type == 2:
 		output = predict_shoe_vector(bottleneck_values)
+	print (type(output[0]))
+	x = []
+	for a in output:
+		x.append(np.asscalar(a)) # converting from np.float32 to float
 	response = {}
-	response['vector'] = output
+	response['vector'] = x
 	return response
 
 '''

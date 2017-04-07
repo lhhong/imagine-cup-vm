@@ -1,0 +1,51 @@
+APIs:
+
+yuxapp.southcentralus.cloudapp.azure.com:5000
+
+1) /create_person
+Method: POST
+Returns: {'personId': <personId>}  # save this personId for use in generating wardrobe
+Body: {
+	'name': <name of user>,
+	'personGroupId': <name of user>  # can just use user's name for personGroupId
+	}
+
+--> Calls create_person(name, personGroupId) from Face/faceapi.py
+
+
+
+2) /add_face
+Method: POST
+Returns: True
+Body: {
+	'image_url': <url of selfie>,
+	'personId': <personId from create_person>,
+	'personGroupId': <name of user>
+	}
+
+--> Calls add_face(image_url, personId, personGroupId) from Face/faceapi.py
+
+
+
+3) /analyse_image
+Method: POST
+Returns: {'vector': <vector in list form>}  # <-- do you want it in string or list?
+Body: {'image_url': <url>}
+
+--> Calls predict_vector(image_url) function from predict.py
+
+
+
+4) /generate_wardrobe
+Method: POST
+Returns: {
+	'tops': <list of tops>,
+	'bottoms': <list of bottoms>,
+	'shoes': <list of shoes>
+	}
+Body: {'image_list': <list of urls>,
+	'personId': <personId>,
+	'personGroupId': <personGroupId>
+	}
+
+--> Calls generatewardrobe(image_list, personId, personGroupId) from generatewardrobe.py
