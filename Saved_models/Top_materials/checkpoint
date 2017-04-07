@@ -1,0 +1,2 @@
+model_checkpoint_path: "Top_materials"
+all_model_checkpoint_paths: "Top_materials"

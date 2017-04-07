@@ -8,6 +8,7 @@ import os
 import json
 from producebottlenecks import producebottlenecks
 import urllib
+import base64
 
 model_dir = 'Saved_models/'
 
@@ -161,11 +162,10 @@ def predict_vector(image_url):
 		output = predict_shoe_vector(bottleneck_values)
 	return output
 
-
 '''
 function to be called to generate wardrobe. 
 returns (list of tops, list of bottoms, list of shoes).
-SHOULD IT RETURN BYTE IMAGE OF CROPPED CLOTHES?
+SHOULD IT RETURN BYTE STRING IMAGE OF CROPPED CLOTHES?
 '''
 def feed_dir(image_dir):
 	producebottlenecks(image_dir) # this will also create the bottleneck folder
@@ -191,6 +191,9 @@ def feed_dir(image_dir):
 		bottleneck_values = np.reshape(bottleneck_values, (1, 2048))
 		summary = predict(bottleneck_values)
 		summary['image_dir'] = top[12:-4]
+		with open(summary['image_dir'], "rb") as imageFile:
+			string = base64.b64encode(imageFile.read())
+		summary['image_string'] = string
 		tops.append(summary)
 
 	bottoms = []
@@ -201,6 +204,9 @@ def feed_dir(image_dir):
 		bottleneck_values = np.reshape(bottleneck_values, (1, 2048))
 		summary = predict(bottleneck_values)
 		summary['image_dir'] = bottom[12:-4]
+		with open(summary['image_dir'], "rb") as imageFile:
+			string = base64.b64encode(imageFile.read())
+		summary['image_string'] = string
 		bottoms.append(summary)
 
 	shoes = []
@@ -211,6 +217,9 @@ def feed_dir(image_dir):
 		bottleneck_values = np.reshape(bottleneck_values, (1, 2048))
 		summary = predict(bottleneck_values)
 		summary['image_dir'] = shoe[12:-4]
+		with open(summary['image_dir'], "rb") as imageFile:
+			string = base64.b64encode(imageFile.read())
+		summary['image_string'] = string
 		shoes.append(summary)
 
 	return (tops, bottoms, shoes)
@@ -239,7 +248,7 @@ if __name__ == '__main__':
 	# print (len(result))
 
 	'''
-	path = 'bottlenecks/Clean clothes/Tops/'
+	path = 'bottlenecks/Unlabelled Clothes/Tops/'
 	files = glob.glob(path+'*.txt')
 	
 	all_bottlenecks = []
@@ -271,7 +280,7 @@ if __name__ == '__main__':
 	print (x.shape)
 
 	df = pd.DataFrame(x)
-	df.to_csv('new_clean_predictedtops.csv')
+	df.to_csv('unlabelled_predictedtops.csv')
 	'''
 
 		# top_type = list(predict_x_2('Top_types', bottleneck_values)[0])
@@ -298,7 +307,7 @@ if __name__ == '__main__':
 	# 	writer.writerow(x)
 
 	'''
-	path = 'bottlenecks/Clean clothes/Bottoms/'
+	path = 'bottlenecks/Unlabelled Clothes/Bottoms/'
 	files = glob.glob(path+'*.txt')
 	
 	all_bottlenecks = []
@@ -329,7 +338,7 @@ if __name__ == '__main__':
 	print (x.shape)
 
 	df = pd.DataFrame(x)
-	df.to_csv('new_clean_predictedbottoms.csv')
+	df.to_csv('unlabelled_predictedbottoms.csv')
 	'''
 
 
@@ -365,7 +374,7 @@ if __name__ == '__main__':
 	# 		writer.writerow(total)
 
 	'''
-	path = 'bottlenecks/Clean clothes/Shoes/'
+	path = 'bottlenecks/Unlabelled Clothes/Shoes/'
 	files = glob.glob(path+'*.txt')
 	
 	all_bottlenecks = []
@@ -393,7 +402,7 @@ if __name__ == '__main__':
 	print (x.shape)
 
 	df = pd.DataFrame(x)
-	df.to_csv('new_clean_predictedshoes.csv')
+	df.to_csv('unlabelled_predictedshoes.csv')
 	'''
 
 	# path = 'bottlenecks/Clothes/Shoes/'

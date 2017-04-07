@@ -81,7 +81,7 @@ print ('{} out of {}'.format(count, total))
 #     "t-shirt-style-pocket",
 # ]
 
-# df = pd.read_csv('new_clean_predictedtops.csv')
+# df = pd.read_csv('unlabelled_predictedtops.csv')
 # count = 0
 # for i in range(len(df)):
 # 	x = (df.loc[i, top_types])
@@ -94,34 +94,34 @@ print ('{} out of {}'.format(count, total))
 # 	else:
 # 		df.ix[i, t_shirt_styles] = 0
 # 		df.ix[i, t_shirt_fits] = 0
-# df.to_csv('newest_clean_predictedtops.csv')
+# df.to_csv('unlabelled_predictedtops.csv')
 
-bottom_materials = [
-    "bottom-material-denim/jeans",
-    "bottom-material-cotton",
-    "bottom-material-dry-fit"
-]
+# bottom_materials = [
+#     "bottom-material-denim/jeans",
+#     "bottom-material-cotton",
+#     "bottom-material-dry-fit"
+# ]
 
-denim_styles = [
-    "denim-style-ripped",
-    "denim-style-acid-wash",
-    "denim-style-washed"
-]
-df = pd.read_csv('new_clean_predictedbottoms.csv')
-count = 0
-for i in range(len(df)):
-	x = (df.loc[i, bottom_materials])
-	index = np.argmax(x)
-	print (x)
-	print (index)
-	if 'denim' not in index:
-		df.ix[i, denim_styles] = 0
-df.to_csv('newest_clean_predictedbottoms.csv')
+# denim_styles = [
+#     "denim-style-ripped",
+#     "denim-style-acid-wash",
+#     "denim-style-washed"
+# ]
+# df = pd.read_csv('unlabelled_predictedbottoms.csv')
+# count = 0
+# for i in range(len(df)):
+# 	x = (df.loc[i, bottom_materials])
+# 	index = np.argmax(x)
+# 	print (x)
+# 	print (index)
+# 	if 'denim' not in index:
+# 		df.ix[i, denim_styles] = 0
+# df.to_csv('unlabelled_predictedbottoms.csv')
 
 
 
 '''adding dir from bottleneck_dir'''
-# data = pd.read_csv('new_clean_predictedshoes.csv')
+# data = pd.read_csv('unlabelled_predictedshoes.csv')
 
 # data['dir'] = data.index
 # for i in range(len(data)):
@@ -131,7 +131,8 @@ df.to_csv('newest_clean_predictedbottoms.csv')
 # 	data['dir'][i] = new
 # 	print (data['dir'][i])
 
-# print (data.to_csv('new_clean_predictedshoes.csv'))
+# print (data.to_csv('unlabelled_predictedshoes.csv'))
+
 
 # top_types = [
 #     "top-type-short-sleeve-t-shirt",

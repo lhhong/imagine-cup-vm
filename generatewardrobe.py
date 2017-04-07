@@ -1,7 +1,6 @@
 from RMPE.testing.python.config_reader import config_reader
 from RMPE.testing.python.demo import getposture
-from Classification.getfeatures import predict
-from Classification2.predict import feed_dir
+from predict import feed_dir
 import urllib
 from Face import faceapi
 import os
@@ -23,13 +22,14 @@ def generatewardrobe(image_list, personId, personGroupId):
 		if coords is not None:
 			image_path = os.path.join(image_dir, str(i)+'.jpg')
 			#image_dir+'/'+str(i)+'.jpg'
-			urllib.urlretrieve(image_list[i], image_path)
+			urllib.urlretrieve(image_list[i], image_path) # saves image to user's folder, to be returned later in feed_dir
 			face_x = coords[1]+coords[2]/2
 			face_y = coords[0]+coords[3]/2
 			getposture(image_path, param, model, face_x, face_y)
 
-	# predict(image_dir)
-	feed_dir(image_dir)
+	x = feed_dir(image_dir)
+	# print (x)
+	return x
 
 if __name__ == '__main__':
 	generatewardrobe(['https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg', 

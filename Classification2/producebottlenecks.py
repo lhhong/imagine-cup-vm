@@ -109,4 +109,4 @@ def producebottlenecks(image_dir):
 	create_bottleneck_file(sess, jpeg_data_tensor, bottleneck_tensor, image_dir)
 
 if __name__ == '__main__':
-	producebottlenecks()
+	producebottlenecks('Unlabelled Clothes/Shoes')
