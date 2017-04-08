@@ -72,6 +72,8 @@ def check_photo(image_url, personId, personGroupId):
         'returnFaceLandmarks': 'false',
     })
 
+    image_url = str(image_url)
+
     body = {
         'url': image_url
     }
