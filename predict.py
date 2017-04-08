@@ -164,7 +164,6 @@ def predict_vector(image_url): # used to output predicted vector
 	elif clothing_type == 2:
 		response['type'] = shoes
 		output = predict_shoe_vector(bottleneck_values)
-	response = {}
 	response['vector'] = output
 	return response
 
