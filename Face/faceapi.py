@@ -101,6 +101,10 @@ def check_face(faceId, personId, personGroupId):
     params = urllib.urlencode({
     })
 
+    faceId = str(faceId)
+    personId = str(personId)
+    personGroupId = str(personGroupId)
+
     body = {
         'faceId': faceId,
         'personId': personId,
