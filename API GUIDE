@@ -45,7 +45,8 @@ Returns: {
 	}
 Body: {'image_list': <list of urls>,
 	'personId': <personId>,
-	'personGroupId': <personGroupId>
+	'personGroupId': <personGroupId>,
+	'time': <time stamp, not very important>
 	}
 
 --> Calls generatewardrobe(image_list, personId, personGroupId) from generatewardrobe.py
