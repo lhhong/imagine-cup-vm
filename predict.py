@@ -154,29 +154,17 @@ def predict_vector(image_url): # used to output predicted vector
 	urllib.urlretrieve(image_url, 'query_image.jpg')
 	bottleneck_values = get_bottleneck('query_image.jpg')
 	clothing_type = predict_type(bottleneck_values)
-	response = {}
+	# response = {}
 	if clothing_type == 0:
-		response['type'] = 'tops'
+		#response['type'] = 'tops'
 		x = predict_top_vector(bottleneck_values)
-		y = []
-		for a in x:
-			y.append(np.asscalar(a))
-		response['vector'] = y
 	elif clothing_type == 1:
-		response['type'] = 'bottoms'
+		#response['type'] = 'bottoms'
 		x = predict_bottom_vector(bottleneck_values)
-		y = []
-		for a in x:
-			y.append(np.asscalar(a))
-		response['vector'] = y
 	elif clothing_type == 2:
-		response['type'] = 'shoes'
+		#response['type'] = 'shoes'
 		x = predict_shoe_vector(bottleneck_values)
-		y = []
-		for a in x:
-			y.append(np.asscalar(a))
-		response['vector'] = y
-	return response
+	return x
 
 '''
 function to be called to generate wardrobe. 
