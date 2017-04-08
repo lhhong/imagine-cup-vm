@@ -43,9 +43,10 @@ if __name__ == '__main__':
 	# 				'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', 
 	# 				'putin')
 
-	generatewardrobe(["http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/10/3/1443892812592/Vladimir-Putin--009.jpg"], 
+	a = generatewardrobe(["http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/10/3/1443892812592/Vladimir-Putin--009.jpg"], 
 					'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', 
 					'putin', '2017-04-08 20:26')
+	print (a)
 
 	# generatewardrobe(["http://www.thewrap.com/wp-content/uploads/2015/11/Donald-Trump.jpg"], 
 	# 				'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', 

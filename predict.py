@@ -193,7 +193,7 @@ def feed_dir(image_dir):
 		bottleneck_string = bottleneck_file.read()
 		bottleneck_values = [float(x) for x in bottleneck_string.split(',')]
 		bottleneck_values = np.reshape(bottleneck_values, (1, 2048))
-		summary = predict(bottleneck_values)
+		summary = predict(bottleneck_values, 0)
 		summary['image_dir'] = top[12:-4]
 		with open(summary['image_dir'], "rb") as imageFile:
 			string = base64.b64encode(imageFile.read())
@@ -206,7 +206,7 @@ def feed_dir(image_dir):
 		bottleneck_string = bottleneck_file.read()
 		bottleneck_values = [float(x) for x in bottleneck_string.split(',')]
 		bottleneck_values = np.reshape(bottleneck_values, (1, 2048))
-		summary = predict(bottleneck_values)
+		summary = predict(bottleneck_values, 1)
 		summary['image_dir'] = bottom[12:-4]
 		with open(summary['image_dir'], "rb") as imageFile:
 			string = base64.b64encode(imageFile.read())
@@ -219,7 +219,7 @@ def feed_dir(image_dir):
 		bottleneck_string = bottleneck_file.read()
 		bottleneck_values = [float(x) for x in bottleneck_string.split(',')]
 		bottleneck_values = np.reshape(bottleneck_values, (1, 2048))
-		summary = predict(bottleneck_values)
+		summary = predict(bottleneck_values, 2)
 		summary['image_dir'] = shoe[12:-4]
 		with open(summary['image_dir'], "rb") as imageFile:
 			string = base64.b64encode(imageFile.read())
@@ -251,6 +251,10 @@ if __name__ == '__main__':
 	# result = feed_dir('USERS/b00c6a39-7807-4cf2-9a04-6b41f2efcf18 wardrobe')
 	# print (result)
 
+	image = 'USERS/b00c6a39-7807-4cf2-9a04-6b41f2efcf18 wardrobe/1-bottom.jpg'
+	bottleneck_values = get_bottleneck(image)
+	result = predict_bottom(bottleneck_values)
+	print (result)
 	# result = predict_vector('https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg')
 	# print (result)
 	# print (len(result['vector']))

@@ -384,15 +384,18 @@ def getposture(imagelink, param, model, x_coord, y_coord):
         top_max_y = max(body_y.get(1,None), body_y.get(2,None), body_y.get(5,None), body_y.get(3,None), body_y.get(4,None), body_y.get(6,None), body_y.get(7,None), body_y.get(8,None), body_y.get(11,None))
         top_min_y = min(a for a in (body_y.get(1,None), body_y.get(2,None), body_y.get(5,None), body_y.get(3,None), body_y.get(4,None), body_y.get(6,None), body_y.get(7,None), body_y.get(8,None), body_y.get(11,None)) if a is not None)
 
-
         top_x_max = top_max_x + (top_max_x - top_min_x)/6
         top_x_min = top_min_x - (top_max_x - top_min_x)/6
         top_y_max = top_max_y + (top_max_y - top_min_y)/4
         top_y_min = top_min_y - (top_max_y - top_min_y)/3.5
 
-        plt.xlim([top_x_min, top_x_max])
-        plt.ylim([top_y_max, top_y_min])
-        plt.savefig(path+'-top.jpg', bbox_inches='tight', pad_inches = 0)
+        ratio = (top_x_max - top_x_min)/(top_y_max - top_y_min)
+        if ratio > 10 or ratio < 0.1:
+            print ('TOP RATIO WRONG')
+        else:
+            plt.xlim([top_x_min, top_x_max])
+            plt.ylim([top_y_max, top_y_min])
+            plt.savefig(path+'-top.jpg', bbox_inches='tight', pad_inches = 0)
     except ValueError:
         print ('TOP NOT FOUND')
 
@@ -402,15 +405,18 @@ def getposture(imagelink, param, model, x_coord, y_coord):
         bot_max_y = max(body_y.get(8,None), body_y.get(11,None), body_y.get(9,None), body_y.get(10,None), body_y.get(12,None), body_y.get(13,None))
         bot_min_y = min(a for a in (body_y.get(8,None), body_y.get(11,None), body_y.get(9,None), body_y.get(10,None), body_y.get(12,None), body_y.get(13,None)) if a is not None)
 
-
         bot_x_max = bot_max_x + (bot_max_x - bot_min_x)/2
         bot_x_min = bot_min_x - (bot_max_x - bot_min_x)/2
         bot_y_max = bot_max_y + (bot_max_y - bot_min_y)/5
         bot_y_min = bot_min_y - (bot_max_y - bot_min_y)/5
 
-        plt.xlim([bot_x_min, bot_x_max])
-        plt.ylim([bot_y_max, bot_y_min])
-        plt.savefig(path+'-bottom.jpg', bbox_inches='tight', pad_inches = 0)
+        ratio = (bot_x_max - bot_x_min)/(bot_y_max - bot_y_min)
+        if ratio > 10 or ratio < 0.1:
+            print ('BOTTOM RATIO WRONG')
+        else:
+            plt.xlim([bot_x_min, bot_x_max])
+            plt.ylim([bot_y_max, bot_y_min])
+            plt.savefig(path+'-bottom.jpg', bbox_inches='tight', pad_inches = 0)
     except ValueError:
         print ('BOTTOM NOT FOUND')
 
