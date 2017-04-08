@@ -2,6 +2,7 @@
 import httplib, urllib, base64
 import json
 import io
+import ast
 
 ''' to save in database: 
     personId, name, userData, personGroupId, persistedFaceId (use this to remove face added to person) 
@@ -85,7 +86,10 @@ def check_photo(image_url, personId, personGroupId):
 
     json_data = json.loads(data)
     for entry in json_data:
-        faceId = str(entry['faceId'])
+        entry = str(entry)
+        entry = ast.literal_eval(entry)
+        print type(entry)
+        faceId = str((entry['faceId']))
         if check_face(faceId, personId, personGroupId):
             coords = entry['faceRectangle']
             return (coords['top'], coords['left'], coords['width'], coords['height'])
@@ -110,8 +114,10 @@ def check_face(faceId, personId, personGroupId):
 
     json_data = json.loads(data)
     if json_data['isIdentical']:
+        print ('true!')
         return True
     else:
+        print ('false!')
         return False
 
 def main():

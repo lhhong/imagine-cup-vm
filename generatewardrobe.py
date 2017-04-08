@@ -32,7 +32,15 @@ def generatewardrobe(image_list, personId, personGroupId):
 	return x
 
 if __name__ == '__main__':
-	generatewardrobe(['https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg', 
-					'http://america.aljazeera.com/content/ajam/opinions/2014/3/vladimir-putin-ukrainerussiacrimeainternationallaw/jcr:content/mainpar/adaptiveimage/src.adapt.960.high.putin_ukraine_doctrine-1a.1394060261398.jpg'], 
+	# generatewardrobe(['https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg', 
+	# 				'http://america.aljazeera.com/content/ajam/opinions/2014/3/vladimir-putin-ukrainerussiacrimeainternationallaw/jcr:content/mainpar/adaptiveimage/src.adapt.960.high.putin_ukraine_doctrine-1a.1394060261398.jpg'], 
+	# 				'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', 
+	# 				'putin')
+
+	generatewardrobe(["http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/10/3/1443892812592/Vladimir-Putin--009.jpg"], 
 					'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', 
 					'putin')
+
+	# generatewardrobe(["http://www.thewrap.com/wp-content/uploads/2015/11/Donald-Trump.jpg"], 
+	# 				'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', 
+	# 				'putin')
