@@ -19,8 +19,8 @@ import pylab as plt
 import os
 
 
-
 def getposture(imagelink, param, model, x_coord, y_coord):
+    plt.ioff()
     test_image = imagelink
     oriImg = cv.imread(test_image) # B,G,R order
     f = plt.imshow(oriImg[:,:,[2,1,0]]) # reorder it before displaying
@@ -439,7 +439,7 @@ def getposture(imagelink, param, model, x_coord, y_coord):
         plt.savefig(path+'-shoe.jpg', bbox_inches='tight', pad_inches = 0)
     else:
         print ('SHOES NOT FOUND')
-
+    plt.close('all')
     print('Done')
 
 if __name__ == '__main__':

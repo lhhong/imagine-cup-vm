@@ -14,6 +14,8 @@ def generatewardrobe(image_list, personId, personGroupId, time):
 	### image_list must be a list of urls
 	image_list = ast.literal_eval(str(image_list))
 	image_dir = 'USERS/'+personId+' wardrobe'
+	if not os.path.isdir('bottlenecks/'+image_dir):
+		os.mkdir('bottlenecks/'+image_dir)
 	if not os.path.isdir(image_dir):
 		os.mkdir(image_dir)
 	image_dir = image_dir+'/'+time
@@ -44,8 +46,10 @@ if __name__ == '__main__':
 	# 				'putin')
 
 	a = generatewardrobe(["http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/10/3/1443892812592/Vladimir-Putin--009.jpg"], 
-					'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', 
-					'putin', '2017-04-08 20:26')
+					'cd09435a-c73b-4df2-888a-31af70a8a2f1', 
+					'jiarui', '2017-04-08 20:26')
+
+	a = str(a)
 	print (a)
 
 	# generatewardrobe(["http://www.thewrap.com/wp-content/uploads/2015/11/Donald-Trump.jpg"], 

@@ -18,10 +18,28 @@ headers = {
 
 
 ##### CREATE PERSON GROUP, GET PERSONID #####
+
 def create_person(name, personGroupId):
     create_params = urllib.urlencode({
         'personGroupId': personGroupId
     })
+
+    # CREATING PERSONGROUPID DOESN'T WORK FOR NOW
+    params = urllib.urlencode({
+    })
+
+    body = {
+        "name":name,
+        "userData":"nothing"
+    }
+
+
+    conn = httplib.HTTPSConnection('westus.api.cognitive.microsoft.com')
+    conn.request("PUT", "/face/v1.0/persongroups/{personGroupId}?%s" % params, "{body}", headers)
+    response = conn.getresponse()
+    data = response.read()
+    print(data)
+    conn.close()
 
     body = {
         "name": name,
@@ -127,21 +145,25 @@ def check_face(faceId, personId, personGroupId):
         return False
 
 def main():
-    name = 'Vladimr Putin'
-    personGroupId = 'putin'
-    selfie = 'http://i.telegraph.co.uk/multimedia/archive/03463/putin_3463140k.jpg'
-    photo = 'https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg'
-    photo = 'http://i.telegraph.co.uk/multimedia/archive/03463/putin_3463140k.jpg'
+    return
+    # create_person('Jia Rui', 'jiarui')
+    # add_face( , 'cd09435a-c73b-4df2-888a-31af70a8a2f1', 'jiarui')
+
+    # name = 'Vladimr Putin'
+    # personGroupId = 'putin'
+    # selfie = 'http://i.telegraph.co.uk/multimedia/archive/03463/putin_3463140k.jpg'
+    # photo = 'https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg'
+    # photo = 'http://i.telegraph.co.uk/multimedia/archive/03463/putin_3463140k.jpg'
 
 
-    urllib.urlretrieve(photo, 'photo.jpg')
-    with open("photo.jpg", "rb") as imageFile:
-        f = imageFile.read()
-        b = bytearray(f)
+    # urllib.urlretrieve(photo, 'photo.jpg')
+    # with open("photo.jpg", "rb") as imageFile:
+    #     f = imageFile.read()
+    #     b = bytearray(f)
 
-    possible_coords = check_photo(photo, 'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', personGroupId)
-    print (possible_coords)
-    print ('done!')
+    # possible_coords = check_photo(photo, 'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', personGroupId)
+    # print (possible_coords)
+    # print ('done!')
 
 if __name__ == '__main__':
     main()

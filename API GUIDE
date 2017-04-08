@@ -39,7 +39,7 @@ Body: {'image_url': <url>}
 4) /generate_wardrobe
 Method: POST
 Returns: {
-	'tops': <list of tops>,
+	'tops': <list of tops>, # --> each top/bottom/shoe is a dictionary with category: prediction
 	'bottoms': <list of bottoms>,
 	'shoes': <list of shoes>
 	}
