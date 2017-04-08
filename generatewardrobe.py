@@ -4,6 +4,7 @@ from predict import feed_dir
 import urllib
 from Face import faceapi
 import os
+import ast
 
 
 param, model = config_reader()
@@ -11,7 +12,7 @@ param, model = config_reader()
 
 def generatewardrobe(image_list, personId, personGroupId):
 	### image_list must be a list of urls
-
+	image_list = ast.literal_eval(str(image_list))
 	image_dir = 'USERS/'+personId+' wardrobe'
 	if not os.path.isdir(image_dir):
 		os.mkdir(image_dir)

@@ -251,7 +251,7 @@ if __name__ == '__main__':
 
 	# result = predict_vector('https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg')
 	# print (result)
-	# print (len(result))
+	# print (len(result['vector']))
 
 	'''
 	path = 'bottlenecks/Unlabelled Clothes/Tops/'
