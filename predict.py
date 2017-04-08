@@ -157,14 +157,13 @@ def predict_vector(image_url): # used to output predicted vector
 	response = {}
 	if clothing_type == 0:
 		response['type'] = 'tops'
-		output = predict_top_vector(bottleneck_values)
+		response['vector'] = predict_top_vector(bottleneck_values)
 	elif clothing_type == 1:
 		response['type'] = 'bottoms'
-		output = predict_bottom_vector(bottleneck_values)
+		response['vector'] = predict_bottom_vector(bottleneck_values)
 	elif clothing_type == 2:
 		response['type'] = 'shoes'
-		output = predict_shoe_vector(bottleneck_values)
-	response['vector'] = output
+		response['vector'] = predict_shoe_vector(bottleneck_values)
 	return response
 
 '''
