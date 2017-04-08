@@ -28,7 +28,7 @@ def generatewardrobe(image_list, personId, personGroupId):
 			urllib.urlretrieve(image_list[i], image_path) # saves image to user's folder, to be returned later in feed_dir
 			face_x = coords[1]+coords[2]/2
 			face_y = coords[0]+coords[3]/2
-			#getposture(image_path, param, model, face_x, face_y)
+			getposture(image_path, param, model, face_x, face_y)
 
 	x = feed_dir(image_dir)
 	# print (x)
