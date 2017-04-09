@@ -64,9 +64,17 @@ def get_bottleneck(image_dir):
 
 	sess = tf.Session()
 
-	if len(image_dir) < 100:
+	if len(image_dir) < 1000:
 		image_data = gfile.FastGFile(image_dir, 'rb').read()
+		print (image_data[:10])
+		print (len(image_data))
 	else:
 		image_data = image_dir
 	values =  run_bottleneck_on_image(sess, image_data, jpeg_data_tensor, bottleneck_tensor)
 	return [np.asarray(values)]
+
+if __name__ == '__main__':
+	urllib.request.urlretrieve('https://firebasestorage.googleapis.com/v0/b/yuxapp-84210.appspot.com/o/1%2F513414925842.jpg?alt=media&token=4c59e9c9-6fa8-4720-99c7-977bae71e9f5', 'bigg.jpg')
+	#urllib.request.urlretrieve('http://nord.imgix.net/Zoom/12/_12807852.jpg?fit=fill&fm=jpg&dpr=2&h=368&w=240&q=30', 'bigg.jpg')
+	#x = get_bottleneck('bigg.jpg')
+	#print (x)

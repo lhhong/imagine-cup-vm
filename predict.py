@@ -9,6 +9,7 @@ import json
 from Classification2.producebottlenecks import producebottlenecks
 import urllib
 import base64
+from PIL import Image
 
 model_dir = 'Saved_models/'
 
@@ -152,6 +153,9 @@ def predict(bottleneck_values, clothing_type=None):
 
 def predict_vector(image_url): # used to output predicted vector
 	urllib.urlretrieve(image_url, 'query_image.jpg')
+	pic = Image.open('query_image.jpg')
+	pic.save('query_image.jpg',quality=40,optimize=True)
+
 	bottleneck_values = get_bottleneck('query_image.jpg')
 	clothing_type = predict_type(bottleneck_values)
 	# response = {}
@@ -251,13 +255,17 @@ if __name__ == '__main__':
 	# result = feed_dir('USERS/b00c6a39-7807-4cf2-9a04-6b41f2efcf18 wardrobe')
 	# print (result)
 
-	image = 'USERS/b00c6a39-7807-4cf2-9a04-6b41f2efcf18 wardrobe/1-bottom.jpg'
-	bottleneck_values = get_bottleneck(image)
-	result = predict_bottom(bottleneck_values)
-	print (result)
+	# image = 'USERS/b00c6a39-7807-4cf2-9a04-6b41f2efcf18 wardrobe/1-bottom.jpg'
+	# bottleneck_values = get_bottleneck(image)
+	# result = predict_bottom(bottleneck_values)
+	# print (result)
+
 	# result = predict_vector('https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg')
 	# print (result)
 	# print (len(result['vector']))
+
+	x = predict_vector('https://firebasestorage.googleapis.com/v0/b/yuxapp-84210.appspot.com/o/1%2F513414925842.jpg?alt=media&token=4c59e9c9-6fa8-4720-99c7-977bae71e9f5')
+	print (x)
 
 	'''
 	path = 'bottlenecks/Unlabelled Clothes/Tops/'
