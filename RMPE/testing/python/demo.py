@@ -23,7 +23,7 @@ def getposture(imagelink, param, model, x_coord, y_coord):
     plt.ioff()
     test_image = imagelink
     oriImg = cv.imread(test_image) # B,G,R order
-    f = plt.imshow(oriImg[:,:,[2,1,0]]) # reorder it before displaying
+    '''f = plt.imshow(oriImg[:,:,[2,1,0]]) # reorder it before displaying'''
 
     #param, model = config_reader()
     multiplier = [x * model['boxsize'] / oriImg.shape[0] for x in param['scale_search']]
@@ -40,6 +40,7 @@ def getposture(imagelink, param, model, x_coord, y_coord):
 
     heatmap_avg = np.zeros((oriImg.shape[0], oriImg.shape[1], 19))
     paf_avg = np.zeros((oriImg.shape[0], oriImg.shape[1], 38))
+    '''
     # first figure shows padded images
     f, axarr = plt.subplots(1, len(multiplier))
     f.set_size_inches((20, 5))
@@ -49,16 +50,17 @@ def getposture(imagelink, param, model, x_coord, y_coord):
     # third figure shows PAFs
     f3, axarr3 = plt.subplots(2, len(multiplier))
     f3.set_size_inches((20, 10))
+    '''
 
     for m in range(len(multiplier)):
         scale = multiplier[m]
         imageToTest = cv.resize(oriImg, (0,0), fx=scale, fy=scale, interpolation=cv.INTER_CUBIC)
         imageToTest_padded, pad = util.padRightDownCorner(imageToTest, model['stride'], model['padValue'])
         #print (imageToTest_padded.shape)
-        
+        '''
         axarr[m].imshow(imageToTest_padded[:,:,[2,1,0]])
         axarr[m].set_title('Input image: scale %d' % m)
-
+        '''
         net.blobs['data'].reshape(*(1, 3, imageToTest_padded.shape[0], imageToTest_padded.shape[1]))
         #net.forward() # dry run
         net.blobs['data'].data[...] = np.transpose(np.float32(imageToTest_padded[:,:,:,np.newaxis]), (3,2,0,1))/256 - 0.5;
@@ -77,6 +79,7 @@ def getposture(imagelink, param, model, x_coord, y_coord):
         paf = paf[:imageToTest_padded.shape[0]-pad[2], :imageToTest_padded.shape[1]-pad[3], :]
         paf = cv.resize(paf, (oriImg.shape[1], oriImg.shape[0]), interpolation=cv.INTER_CUBIC)
         
+        '''
         # visualization
         axarr2[m].imshow(oriImg[:,:,[2,1,0]])
         ax2 = axarr2[m].imshow(heatmap[:,:,3], alpha=.5) # right wrist
@@ -88,10 +91,12 @@ def getposture(imagelink, param, model, x_coord, y_coord):
         axarr3.flat[len(multiplier) + m].imshow(oriImg[:,:,[2,1,0]])
         ax3y = axarr3.flat[len(multiplier) + m].imshow(paf[:,:,17], alpha=.5) # right wrist
         axarr3.flat[len(multiplier) + m].set_title('PAFs (y comp. of Relb to Rwri): scale %d' % m)
+        '''
         
         heatmap_avg = heatmap_avg + heatmap / len(multiplier)
         paf_avg = paf_avg + paf / len(multiplier)
 
+    '''
     f2.subplots_adjust(right=0.93)
     cbar_ax = f2.add_axes([0.95, 0.15, 0.01, 0.7])
     _ = f2.colorbar(ax2, cax=cbar_ax)
@@ -101,12 +106,12 @@ def getposture(imagelink, param, model, x_coord, y_coord):
     _ = f3.colorbar(ax3x, cax=cbar_axx)
     cbar_axy = f3.add_axes([0.95, 0.15, 0.01, 0.3])
     _ = f3.colorbar(ax3y, cax=cbar_axy)
-
+    '''
 
     # Let's have a closer look on those averaged heatmaps and PAFs!
 
     # In[68]:
-
+    '''
     plt.imshow(oriImg[:,:,[2,1,0]])
     plt.imshow(heatmap_avg[:,:,2], alpha=.5)
     fig = matplotlib.pyplot.gcf()
@@ -115,7 +120,7 @@ def getposture(imagelink, param, model, x_coord, y_coord):
     fig.subplots_adjust(right=0.93)
     cbar_ax = fig.add_axes([0.95, 0.15, 0.01, 0.7])
     _ = fig.colorbar(ax2, cax=cbar_ax)
-
+    '''
 
     # In[69]:
 
@@ -129,8 +134,10 @@ def getposture(imagelink, param, model, x_coord, y_coord):
     V = ma.masked_array(V, mask=M)
 
     # 1
+    '''
     plt.figure()
     plt.imshow(oriImg[:,:,[2,1,0]], alpha = .5)
+    '''
     s = 5
     Q = plt.quiver(X[::s,::s], Y[::s,::s], U[::s,::s], V[::s,::s], 
                    scale=50, headaxislength=4, alpha=.5, width=0.001, color='r')
