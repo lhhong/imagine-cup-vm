@@ -29,6 +29,7 @@ def generatewardrobe(image_list, personId, personGroupId, time):
 	for i in range(len(image_list)):
 		urllib.urlretrieve(image_list[i], path)
 		pic = Image.open(path)
+		
 
 		if hasattr(pic, '_getexif'):
 			orientation = 0x0112
@@ -42,7 +43,15 @@ def generatewardrobe(image_list, personId, personGroupId, time):
 				}
 				pic = pic.transpose(rotations[orientation])
 
-		pic.save(path,quality=30,optimize=True)
+		x = (pic.size)
+		a = x[0]/5
+		b = x[1]/5
+
+		im_resized = pic.resize((a,b), Image.ANTIALIAS)
+		im_resized.save(path, "JPEG")
+		
+
+		# pic.save(path,quality=30,optimize=True)
 		with open(path, 'rb') as imageFile:
 			f = imageFile.read()
 			b = bytearray(f)
