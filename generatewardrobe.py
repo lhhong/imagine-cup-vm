@@ -3,6 +3,7 @@ from RMPE.testing.python.demo import getposture
 from predict import feed_dir
 import urllib
 from Face import faceapi
+from Face import bytesfaceapi
 import os
 import ast
 from PIL import Image
@@ -24,17 +25,25 @@ def generatewardrobe(image_list, personId, personGroupId, time):
 	if not os.path.isdir(image_dir):
 		os.mkdir(image_dir)
 
-
+	path = 'wardrobe_candidate.jpg'
 	for i in range(len(image_list)):
-		coords = faceapi.check_photo(image_list[i], personId, personGroupId)
+		urllib.urlretrieve(image_list[i], path)
+		pic = Image.open(path)
+		pic.save(path,quality=50,optimize=True)
+		with open(path, 'rb') as imageFile:
+			f = imageFile.read()
+			b = bytearray(f)
+
+		coords = bytesfaceapi.check_photo(b, personId, personGroupId)
+		#coords = faceapi.check_photo(image_list[i], personId, personGroupId)
 		coords = ast.literal_eval(str(coords))
 		print (coords)
 		if coords is not None:
 			image_path = os.path.join(image_dir, str(i)+'.jpg')
 			#image_dir+'/'+str(i)+'.jpg'
 			urllib.urlretrieve(image_list[i], image_path) # saves image to user's folder, to be returned later in feed_dir
-			pic = Image.open(image_path)
-			pic.save(image_path,quality=40,optimize=True)
+			# pic = Image.open(image_path)
+			# pic.save(image_path,quality=40,optimize=True)
 			face_x = coords[1]+coords[2]/2
 			face_y = coords[0]+coords[3]/2
 			getposture(image_path, param, model, face_x, face_y)
