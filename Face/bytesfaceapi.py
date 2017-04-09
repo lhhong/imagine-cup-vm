@@ -138,7 +138,7 @@ def main():
 
 
 	# urllib.urlretrieve(photo, 'photo.jpg')
-	with open("IMG_0632.JPG", "rb") as imageFile:
+	with open("IMG_0641.JPG", "rb") as imageFile:
 		f = imageFile.read()
 		b = bytearray(f)
 
@@ -150,7 +150,8 @@ def main():
 	#add_face(b, 'e49417ac-0960-4711-a6e4-be3ffaf32ab9', 'xinchen')
 
 	'''jiexun'''
-	add_face(b, '83210ef7-0ac4-413b-8c75-3eab6beb101b', 'jiexun')
+	#add_face(b, '83210ef7-0ac4-413b-8c75-3eab6beb101b', 'jiexun')
+	# ee447ea5-4abe-4ff7-a363-14cba98b434b  <-- persisted face for smiling face I added
 
 	# possible_coords = check_photo(b, 'e49417ac-0960-4711-a6e4-be3ffaf32ab9', 'xinchen')
 	# print (possible_coords)

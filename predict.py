@@ -230,7 +230,7 @@ def predict_shoe(bottleneck_values):
 	tags = []
 	if not len(shoe_features) < 1:
 		for x in shoe_features:
-			tags.append(x[16:])
+			tags.append(x[13:])
 
 	string_tags = str(tags)[1:-1].replace('\'', '')
 	if len(string_tags) < 2:

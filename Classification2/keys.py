@@ -437,3 +437,41 @@ KEYS['Shoe_features'] = shoe_features
 
 # with proper names
 KEYS2 = {}
+
+
+# dictionary = {
+#     "shoes-primary-color-white" = 'White',
+#     "shoes-primary-color-beige" = 'Beige',
+#     "shoes-primary-color-black" = 'Black',
+#     "shoes-primary-color-brown" = 'Brown',
+#     "shoes-primary-color-grey" = 'Grey',
+#     "shoes-primary-color-blue" = 'Blue',
+#     "shoes-primary-color-navy" = 'Navy',
+#     "shoes-primary-color-teal" = 'Teal',
+#     "shoes-primary-color-green" = 'Green',
+#     "shoes-primary-color-olive" = 'Olive',
+#     "shoes-primary-color-pink" = 'Pink',
+#     "shoes-primary-color-red" = 'Red',
+#     "shoes-primary-color-maroon" = 'Maroon',
+#     "shoes-primary-color-purple" = 'Purple',
+#     "shoes-primary-color-orange" = 'Orange',
+#     "shoes-primary-color-yellow" = 'Yellow',
+#     "shoes-secondary-color-white" = 'White',
+#     "shoes-secondary-color-beige" = 'Beige',
+#     "shoes-secondary-color-black" = 'Black',
+#     "shoes-secondary-color-brown" = 'Brown',
+#     "shoes-secondary-color-grey" = 'Grey',
+#     "shoes-secondary-color-blue" = 'Blue',
+#     "shoes-secondary-color-navy": 'Navy',
+#     "shoes-secondary-color-teal",
+#     "shoes-secondary-color-green",
+#     "shoes-secondary-color-olive",
+#     "shoes-secondary-color-pink",
+#     "shoes-secondary-color-red",
+#     "shoes-secondary-color-maroon",
+#     "shoes-secondary-color-purple",
+#     "shoes-secondary-color-orange",
+#     "shoes-secondary-color-yellow",
+#     "shoes-secondary-color-none" 
+
+# }
