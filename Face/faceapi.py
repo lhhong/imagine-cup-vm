@@ -25,17 +25,15 @@ def create_person(name, personGroupId):
     })
 
     # CREATING PERSONGROUPID DOESN'T WORK FOR NOW
-    params = urllib.urlencode({
-    })
+    string = "/face/v1.0/persongroups/"+personGroupId
 
     body = {
         "name":name,
         "userData":"nothing"
     }
 
-
     conn = httplib.HTTPSConnection('westus.api.cognitive.microsoft.com')
-    conn.request("PUT", "/face/v1.0/persongroups/{personGroupId}?%s" % params, "{body}", headers)
+    conn.request("PUT", string, str(body), headers)
     response = conn.getresponse()
     data = response.read()
     print(data)
@@ -145,8 +143,8 @@ def check_face(faceId, personId, personGroupId):
         return False
 
 def main():
-    return
-    # create_person('Jia Rui', 'jiarui')
+
+    create_person('Xin Chen', 'xinchen')
     # add_face( , 'cd09435a-c73b-4df2-888a-31af70a8a2f1', 'jiarui')
 
     # name = 'Vladimr Putin'

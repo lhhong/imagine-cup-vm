@@ -138,15 +138,20 @@ def main():
 
 
 	# urllib.urlretrieve(photo, 'photo.jpg')
-	with open("IMG_0619.JPG", "rb") as imageFile:
+	with open("IMG_0630.JPG", "rb") as imageFile:
 		f = imageFile.read()
 		b = bytearray(f)
 
-	add_face(b, 'cd09435a-c73b-4df2-888a-31af70a8a2f1', 'jiarui')
+	'''jiarui'''
+	#add_face(b, 'cd09435a-c73b-4df2-888a-31af70a8a2f1', 'jiarui')
+	#b5f2f363-39c4-4f6f-80f8-2f222ee48be8 <-- persisted face that wasa wrongly added, removed alr
 
-	# possible_coords = check_photo(b, 'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', personGroupId)
-	# print (possible_coords)
-	# print ('done!')
+	'''xinchen'''
+	#add_face(b, 'e49417ac-0960-4711-a6e4-be3ffaf32ab9', 'xinchen')
+
+	possible_coords = check_photo(b, 'e49417ac-0960-4711-a6e4-be3ffaf32ab9', 'xinchen')
+	print (possible_coords)
+	print ('done!')
 
 if __name__ == '__main__':
 	main()

@@ -29,6 +29,19 @@ def generatewardrobe(image_list, personId, personGroupId, time):
 	for i in range(len(image_list)):
 		urllib.urlretrieve(image_list[i], path)
 		pic = Image.open(path)
+
+		if hasattr(pic, '_getexif'):
+			orientation = 0x0112
+			exif = pic._getexif()
+			if exif is not None:
+				orientation = exif[orientation]
+				rotations = {
+					3: Image.ROTATE_180,
+					6: Image.ROTATE_270,
+					8: Image.ROTATE_90
+				}
+				pic = pic.transpose(rotations[orientation])
+
 		pic.save(path,quality=50,optimize=True)
 		with open(path, 'rb') as imageFile:
 			f = imageFile.read()
@@ -53,14 +66,14 @@ def generatewardrobe(image_list, personId, personGroupId, time):
 	return x
 
 if __name__ == '__main__':
-	a = generatewardrobe(['https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg', 
-					'http://america.aljazeera.com/content/ajam/opinions/2014/3/vladimir-putin-ukrainerussiacrimeainternationallaw/jcr:content/mainpar/adaptiveimage/src.adapt.960.high.putin_ukraine_doctrine-1a.1394060261398.jpg'], 
-					'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', 
-					'putin', '2017-04-08 20:26')
+	# a = generatewardrobe(['https://jafrianews.files.wordpress.com/2012/05/russian-president-putin-with-vladimir-putin-may-7-2012.jpg', 
+	# 				'http://america.aljazeera.com/content/ajam/opinions/2014/3/vladimir-putin-ukrainerussiacrimeainternationallaw/jcr:content/mainpar/adaptiveimage/src.adapt.960.high.putin_ukraine_doctrine-1a.1394060261398.jpg'], 
+	# 				'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', 
+	# 				'putin', '2017-04-08 20:26')
 
-	# a = generatewardrobe(["http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/10/3/1443892812592/Vladimir-Putin--009.jpg"], 
-	# 				'cd09435a-c73b-4df2-888a-31af70a8a2f1', 
-	# 				'jiarui', '2017-04-08 20:26')
+	a = generatewardrobe(["https://firebasestorage.googleapis.com/v0/b/yuxapp-84210.appspot.com/o/1%2F513423863921.jpg?alt=media&token=d5458f51-7c26-4735-9ad1-604cf8604261"], 
+					'e49417ac-0960-4711-a6e4-be3ffaf32ab9', 
+					'xinchen', '2017-04-08 20:26')
 
 	a = str(a)
 	print (a)
