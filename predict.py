@@ -153,8 +153,8 @@ def predict(bottleneck_values, clothing_type=None):
 
 def predict_vector(image_url): # used to output predicted vector
 	urllib.urlretrieve(image_url, 'query_image.jpg')
-	pic = Image.open('query_image.jpg')
-	pic.save('query_image.jpg',quality=40,optimize=True)
+	# pic = Image.open('query_image.jpg')
+	# pic.save('query_image.jpg',quality=40,optimize=True)
 
 	bottleneck_values = get_bottleneck('query_image.jpg')
 	clothing_type = predict_type(bottleneck_values)
