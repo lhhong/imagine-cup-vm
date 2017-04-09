@@ -5,6 +5,7 @@ import urllib
 from Face import faceapi
 import os
 import ast
+from PIL import Image
 
 
 param, model = config_reader()
@@ -32,6 +33,8 @@ def generatewardrobe(image_list, personId, personGroupId, time):
 			image_path = os.path.join(image_dir, str(i)+'.jpg')
 			#image_dir+'/'+str(i)+'.jpg'
 			urllib.urlretrieve(image_list[i], image_path) # saves image to user's folder, to be returned later in feed_dir
+			pic = Image.open(image_path)
+			pic.save(image_path,quality=40,optimize=True)
 			face_x = coords[1]+coords[2]/2
 			face_y = coords[0]+coords[3]/2
 			getposture(image_path, param, model, face_x, face_y)
