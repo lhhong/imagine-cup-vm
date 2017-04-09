@@ -9,7 +9,6 @@ import json
 from Classification2.producebottlenecks import producebottlenecks
 import urllib
 import base64
-from PIL import Image
 
 model_dir = 'Saved_models/'
 
@@ -56,18 +55,57 @@ def predict_x_2(attributes, bottleneck_values, single=True):
 
 def predict_top(bottleneck_values):
 	summary = {}
+	tags = []
 	summary['Clothing type'] = 'Top'
-	summary['Top primary colour'] = predict_x('Top_primary_colours', bottleneck_values)
-	summary['Top secondary colour'] = predict_x('Top_secondary_colours', bottleneck_values)
-	summary['Top type'] = predict_x('Top_types', bottleneck_values)	
+	pri_colour = predict_x('Top_primary_colours', bottleneck_values)
+	#summary['Top primary colour'] = pri_colour
+	sec_colour = predict_x('Top_secondary_colours', bottleneck_values)
+	#summary['Top secondary colour'] = sec_colour
+	top_type = predict_x('Top_types', bottleneck_values)
+	summary['Top type'] = top_type
 	if 't-' in summary['Top type'] or 'singlet' in summary['Top type'] or 'polo' in summary['Top type']:
-		summary['T-shirt style'] = predict_x('T-shirt_styles', bottleneck_values, False)
+		t_shirt_styles = predict_x('T-shirt_styles', bottleneck_values, False)
+		#summary['T-shirt style'] = t_shirt_styles
+		for a in t_shirt_styles:
+			tags.append(a[14:].replace('-', ' '))
 		summary['T-shirt fit'] = predict_x('T-shirt_fits', bottleneck_values)
+		tags.append(summary['T-shirt fit'])
+
+		summary['Category'] = 'T-shirts'
+
 	else:
-		summary['Shirt style'] = predict_x('Shirt_styles', bottleneck_values, False)
+		shirt_styles = predict_x('Shirt_styles', bottleneck_values, False)
+		#summary['Shirt style'] = shirt_styles
+		for b in shirt_styles:
+			tags.append(b[12:].replace('-', ' '))
 		summary['Shirt fit'] = predict_x('Shirt_fits', bottleneck_values)
-	summary['Top pattern'] = predict_x('Top_patterns', bottleneck_values, False)
-	summary['Top material'] = predict_x('Top_materials', bottleneck_values)
+		tags.append(summary['Shirt fit'])
+
+		summary['Category'] = 'Shirts'
+
+	top_patterns = predict_x('Top_patterns', bottleneck_values, False)
+	#summary['Top pattern'] = top_patterns
+	top_material = predict_x('Top_materials', bottleneck_values)
+	#summary['Top material'] = top_material
+	
+	pri_colour = pri_colour[18:]
+	pri_colour = pri_colour.capitalize()
+	sec_colour = sec_colour[20:]
+	if not 'none' in sec_colour:
+		colour = pri_colour+', '+sec_colour
+	else:
+		colour = pri_colour
+
+	top_type = top_type[9:]
+	top_type = top_type.replace('-', ' ')
+
+	for c in top_patterns:
+		tags.append(c[13:])
+
+	summary['Material'] = top_material[13:].capitalize()
+	summary['Title'] = colour+' '+top_type
+	summary['Tags'] = str(tags)[1:-1].replace('\'', '')
+
 	return summary
 
 def predict_top_vector(bottleneck_values):
@@ -92,16 +130,48 @@ def predict_top_vector(bottleneck_values):
 
 def predict_bottom(bottleneck_values):
 	summary = {}
-	summary['Clothing type'] = 'Bottom'
-	summary['Bottom primary colour'] = predict_x('Bottom_primary_colours', bottleneck_values)
-	summary['Bottom secondary colour'] = predict_x('Bottom_secondary_colours', bottleneck_values)
-	summary['Bottom type'] = predict_x('Bottom_types', bottleneck_values)
+	tags = []
+	#summary['Clothing type'] = 'Bottom'
+	pri_colour = predict_x('Bottom_primary_colours', bottleneck_values)
+	#summary['Bottom primary colour'] = pri_colour
+	sec_colour = predict_x('Bottom_secondary_colours', bottleneck_values)
+	#summary['Bottom secondary colour'] = sec_colour
+	bottom_type = predict_x('Bottom_types', bottleneck_values)
+	#summary['Bottom type'] = bottom_type
+	if 'short' in bottom_type:
+		summary['Category'] = 'Shorts'
+	else:
+		summary['Category'] = 'Pants'
 	summary['Bottom material'] = predict_x('Bottom_materials', bottleneck_values)
 	if 'denim' in summary['Bottom material']:
 		summary['Denim style'] = predict_x('Denim_styles', bottleneck_values, False)
+		if 'Pants' in summary['Category']:
+			summary['Category'] = 'Jeans'
+		for a in summary['Denim style']:
+			tags.append(a[12:])
 	summary['Bottom patterns'] = predict_x('Bottom_patterns', bottleneck_values, False)
-	summary['Bottom style'] = predict_x('Bottom_styles', bottleneck_values)
+	for b in summary['Bottom patterns']:
+		tags.append(b[16:].replace('-', ' '))
+	bottom_style = predict_x('Bottom_styles', bottleneck_values)
+	summary['Bottom style'] = bottom_style
+	if not 'none' in bottom_style:
+		tags.append(bottom_style[13:])
 	summary['Bottom fit'] = predict_x('Bottom_fits', bottleneck_values)
+	tags.append(summary['Bottom fit'][11:].replace('-', ' '))
+
+	pri_colour = pri_colour[21:]
+	pri_colour = pri_colour.capitalize()
+	sec_colour = sec_colour[23:]
+	if not 'none' in sec_colour:
+		colour = pri_colour+', '+sec_colour
+	else:
+		colour = pri_colour
+
+	bottom_type = bottom_type[12:].replace('-', ' ')
+
+	summary['Title'] = colour+' '+bottom_type
+	summary['Material'] = summary['Bottom material'][16:].capitalize()
+	summary['Tags'] = str(tags)[1:-1].replace('\'', '')
 	return summary
 
 def predict_bottom_vector(bottleneck_values):
@@ -122,12 +192,52 @@ def predict_bottom_vector(bottleneck_values):
 
 def predict_shoe(bottleneck_values):
 	summary = {}
-	summary['Clothing type'] = 'Shoe'
-	summary['Shoe primary colour'] = predict_x('Shoe_primary_colours', bottleneck_values)
-	summary['Shoe secondary colour'] = predict_x('Shoe_secondary_colours', bottleneck_values)
-	summary['Shoe type'] = predict_x('Shoe_types', bottleneck_values)
-	summary['Shoe feature'] = predict_x('Shoe_features', bottleneck_values, False)
-	summary['Shoe material'] = predict_x('Shoe_materials', bottleneck_values, False)
+	summary['Category'] = 'Shoes'
+	#summary['Clothing type'] = 'Shoe'
+	pri_colour = predict_x('Shoe_primary_colours', bottleneck_values)
+	#summary['Shoe primary colour'] = pri_colour
+	sec_colour = predict_x('Shoe_secondary_colours', bottleneck_values)
+	#summary['Shoe secondary colour'] = sec_colour
+	shoe_type = predict_x('Shoe_types', bottleneck_values)
+	#summary['Shoe type'] = shoe_type
+	shoe_features = predict_x('Shoe_features', bottleneck_values, False)
+	#summary['Shoe feature'] = shoe_features
+	shoe_materials = predict_x('Shoe_materials', bottleneck_values, False)
+	#summary['Shoe material'] = shoe_materials
+
+	pri_colour = pri_colour[20:]
+	pri_colour = pri_colour.capitalize()
+	sec_colour = sec_colour[22:]
+	if not 'none' in sec_colour:
+		colour = pri_colour+', '+sec_colour
+	else:
+		colour = pri_colour
+	shoe_type = shoe_type[11:].replace('-', ' ')
+
+	summary['Title'] = colour+' '+shoe_type
+
+	materials = []
+	if not len(shoe_materials) < 1:
+		for x in shoe_materials:
+			materials.append(x[16:])
+
+	string_materials = str(materials)[1:-1].replace('\'', '')
+	if len(string_materials) < 2:
+		summary['Material'] = '--'
+	else:
+		summary['Material'] = string_materials
+
+	tags = []
+	if not len(shoe_features) < 1:
+		for x in shoe_features:
+			tags.append(x[16:])
+
+	string_tags = str(tags)[1:-1].replace('\'', '')
+	if len(string_tags) < 2:
+		summary['Tags'] = '--'
+	else:
+		summary['Tags'] = string_tags
+
 	return summary
 
 def predict_shoe_vector(bottleneck_values):
@@ -264,8 +374,13 @@ if __name__ == '__main__':
 	# print (result)
 	# print (len(result['vector']))
 
-	x = predict_vector('https://firebasestorage.googleapis.com/v0/b/yuxapp-84210.appspot.com/o/1%2F513414925842.jpg?alt=media&token=4c59e9c9-6fa8-4720-99c7-977bae71e9f5')
+	bottleneck_values = get_bottleneck('test.jpg')
+	x = predict_top(bottleneck_values)
 	print (x)
+	print (x['Category'])
+	print (x['Title'])
+	print (x['Material'])
+	print (x['Tags'])
 
 	'''
 	path = 'bottlenecks/Unlabelled Clothes/Tops/'
