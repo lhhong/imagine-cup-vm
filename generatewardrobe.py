@@ -42,7 +42,7 @@ def generatewardrobe(image_list, personId, personGroupId, time):
 				}
 				pic = pic.transpose(rotations[orientation])
 
-		pic.save(path,quality=50,optimize=True)
+		pic.save(path,quality=20,optimize=True)
 		with open(path, 'rb') as imageFile:
 			f = imageFile.read()
 			b = bytearray(f)
@@ -71,7 +71,7 @@ if __name__ == '__main__':
 	# 				'b00c6a39-7807-4cf2-9a04-6b41f2efcf18', 
 	# 				'putin', '2017-04-08 20:26')
 
-	a = generatewardrobe(["https://firebasestorage.googleapis.com/v0/b/yuxapp-84210.appspot.com/o/1%2F513423863921.jpg?alt=media&token=d5458f51-7c26-4735-9ad1-604cf8604261"], 
+	a = generatewardrobe(["https://firebasestorage.googleapis.com/v0/b/yuxapp-84210.appspot.com/o/1%2F513432653368.jpg?alt=media&token=81c709c2-192d-418e-8340-d879701d7ed4"], 
 					'e49417ac-0960-4711-a6e4-be3ffaf32ab9', 
 					'xinchen', '2017-04-08 20:26')
 

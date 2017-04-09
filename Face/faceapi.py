@@ -144,7 +144,7 @@ def check_face(faceId, personId, personGroupId):
 
 def main():
 
-    create_person('Xin Chen', 'xinchen')
+    create_person('Jie Xun', 'jiexun')
     # add_face( , 'cd09435a-c73b-4df2-888a-31af70a8a2f1', 'jiarui')
 
     # name = 'Vladimr Putin'

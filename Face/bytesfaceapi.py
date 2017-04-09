@@ -138,7 +138,7 @@ def main():
 
 
 	# urllib.urlretrieve(photo, 'photo.jpg')
-	with open("IMG_0630.JPG", "rb") as imageFile:
+	with open("IMG_0632.JPG", "rb") as imageFile:
 		f = imageFile.read()
 		b = bytearray(f)
 
@@ -149,9 +149,12 @@ def main():
 	'''xinchen'''
 	#add_face(b, 'e49417ac-0960-4711-a6e4-be3ffaf32ab9', 'xinchen')
 
-	possible_coords = check_photo(b, 'e49417ac-0960-4711-a6e4-be3ffaf32ab9', 'xinchen')
-	print (possible_coords)
-	print ('done!')
+	'''jiexun'''
+	add_face(b, '83210ef7-0ac4-413b-8c75-3eab6beb101b', 'jiexun')
+
+	# possible_coords = check_photo(b, 'e49417ac-0960-4711-a6e4-be3ffaf32ab9', 'xinchen')
+	# print (possible_coords)
+	# print ('done!')
 
 if __name__ == '__main__':
 	main()
