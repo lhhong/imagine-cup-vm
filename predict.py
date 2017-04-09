@@ -69,7 +69,7 @@ def predict_top(bottleneck_values):
 		for a in t_shirt_styles:
 			tags.append(a[14:].replace('-', ' '))
 		summary['T-shirt fit'] = predict_x('T-shirt_fits', bottleneck_values)
-		tags.append(summary['T-shirt fit'])
+		tags.append(summary['T-shirt fit'][12:])
 
 		summary['Category'] = 'T-shirts'
 
@@ -79,7 +79,7 @@ def predict_top(bottleneck_values):
 		for b in shirt_styles:
 			tags.append(b[12:].replace('-', ' '))
 		summary['Shirt fit'] = predict_x('Shirt_fits', bottleneck_values)
-		tags.append(summary['Shirt fit'])
+		tags.append(summary['Shirt fit'][10:])
 
 		summary['Category'] = 'Shirts'
 
