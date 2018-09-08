@@ -87,7 +87,7 @@ def predict_top(bottleneck_values):
 	#summary['Top pattern'] = top_patterns
 	top_material = predict_x('Top_materials', bottleneck_values)
 	#summary['Top material'] = top_material
-	
+
 	pri_colour = pri_colour[18:]
 	pri_colour = pri_colour.capitalize()
 	sec_colour = sec_colour[20:]
@@ -261,10 +261,13 @@ def predict(bottleneck_values, clothing_type=None):
 	return output
 	# TODO: package results into nice message
 
-def predict_vector(image_url): # used to output predicted vector
-	urllib.urlretrieve(image_url, 'query_image.jpg')
+def predict_vector_from_url(image_url): # used to output predicted vector
+	urllib.request.urlretrieve(image_url, 'query_image.jpg')
 	# pic = Image.open('query_image.jpg')
 	# pic.save('query_image.jpg',quality=40,optimize=True)
+	return predict_vector()
+
+def predict_vector():
 
 	bottleneck_values = get_bottleneck('query_image.jpg')
 	clothing_type = predict_type(bottleneck_values)
@@ -281,7 +284,7 @@ def predict_vector(image_url): # used to output predicted vector
 	return x
 
 '''
-function to be called to generate wardrobe. 
+function to be called to generate wardrobe.
 returns (list of tops, list of bottoms, list of shoes).
 SHOULD IT RETURN BYTE STRING IMAGE OF CROPPED CLOTHES?
 '''
@@ -361,7 +364,7 @@ if __name__ == '__main__':
 	# print (predict(bottleneck_values))
 	# print (predict_top_2(bottleneck_values))
 	# print (len(predict_top_2(bottleneck_values)))
-	
+
 	# result = feed_dir('USERS/b00c6a39-7807-4cf2-9a04-6b41f2efcf18 wardrobe')
 	# print (result)
 
@@ -385,7 +388,7 @@ if __name__ == '__main__':
 	'''
 	path = 'bottlenecks/Unlabelled Clothes/Tops/'
 	files = glob.glob(path+'*.txt')
-	
+
 	all_bottlenecks = []
 	bottleneck_paths = []
 	bar = Bar('pri: ', max=len(files))
@@ -444,7 +447,7 @@ if __name__ == '__main__':
 	'''
 	path = 'bottlenecks/Unlabelled Clothes/Bottoms/'
 	files = glob.glob(path+'*.txt')
-	
+
 	all_bottlenecks = []
 	bottleneck_paths = []
 	bar = Bar('bottlenecks: ', max=len(files))
@@ -511,7 +514,7 @@ if __name__ == '__main__':
 	'''
 	path = 'bottlenecks/Unlabelled Clothes/Shoes/'
 	files = glob.glob(path+'*.txt')
-	
+
 	all_bottlenecks = []
 	bottleneck_paths = []
 	bar = Bar('bottlenecks: ', max=len(files))
